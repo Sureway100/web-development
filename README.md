@@ -6,4 +6,7 @@ WWW.LIPSUM.COM => USED TO GENERATE PARAGRAPHS OR JUST TYPING "FUNNY LOREM IPSUM"
 VOID ELEMENTS OR SELF CLOSING ELEMENTS LIKE HR, BR
 
 elements learnt => <p>, <h>,<br/>,<hr/>, <li>, <ol>, <ul>, <anchor tag>, <a herf>
-<a draggable = true>
+<a draggable = true>, <img>
+
+Absolute vs relative file path
+for absolute, we are starting from the root folder and down to the location we want
