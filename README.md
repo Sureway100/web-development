@@ -27,3 +27,10 @@ it is most likely shorter than the absolute one. for relative we have some speci
   index.html (lowercase i)
 - got to settings, navigate to pages
 - change branch from none to main and save... refresh your page until your see your url popup
+
+------------------------------------------ 2 ---------------------------------------------------
+CSS CSS CSS CSS CSS
+
+-inline => <tag style="css"/>
+-internal => <style>css</style>
+-external => <link href="style.css"/>
