@@ -34,3 +34,9 @@ CSS CSS CSS CSS CSS
 -inline => <tag style="css"/>
 -internal => <style>css</style>
 -external => <link href="style.css"/>
+
+=> CSS selector
+
+- element selector
+- attr selector => p[draggable] => this means select all para with attr draggable
+- universal selector
