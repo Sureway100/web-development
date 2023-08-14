@@ -1,1 +1,9 @@
 liveScript -> Jscript -> EscmaScript
+----- variable
+typeOf("contents");
+prompt("your name");  => getting user input
+
+----------strings-------
+-word.length
+-word.slice(0,3)=> 3-0 = 3 => meaning you expecting 3 chars=> (start, end)
+-toUpperCase and toLowerCase

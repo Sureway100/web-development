@@ -1,0 +1,3 @@
+frontend => server => application => database
+
+node using v8 chromnium
