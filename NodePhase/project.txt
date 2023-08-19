@@ -1,3 +1,6 @@
 frontend => server => application => database
 
-node using v8 chromnium
+node using v8 chromnium and documentation of => https://nodejs.org/en/docs
+
+REPL => READ EVAL PRINT LOOP
+

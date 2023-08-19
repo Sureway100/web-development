@@ -1,0 +1,14 @@
+{
+  "name": "1_npm",
+  "version": "1.0.0",
+  "description": "learning npm sillyname package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "david sureway",
+  "license": "ISC",
+  "dependencies": {
+    "sillyname": "^0.1.0"
+  }
+}
