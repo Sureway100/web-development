@@ -35,10 +35,16 @@ app.use(express.static("public"));
 //   }
 // });
 
+app.get("/signup", (req, res) => {
+  // use res.renser instead of sendfile
+  // res.sendFile(__dirname + "/views/index.ejs");
+  res.render(__dirname + "/views/signup.ejs");
+  // res.render("index.ejs", { data: "result" });
+});
 app.get("/", (req, res) => {
   // use res.renser instead of sendfile
   // res.sendFile(__dirname + "/views/index.ejs");
-  res.render(__dirname + "/views/index.ejs");
+  res.render(__dirname + "/views/login.ejs");
   // res.render("index.ejs", { data: "result" });
 });
 
