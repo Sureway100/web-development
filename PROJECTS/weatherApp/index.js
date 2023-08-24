@@ -35,6 +35,13 @@ app.use(express.static("public"));
 //   }
 // });
 
+app.get("/weather", (req, res) => {
+  // use res.renser instead of sendfile
+  // res.sendFile(__dirname + "/views/index.ejs");
+  res.render(__dirname + "/views/weather.ejs");
+  // res.render("index.ejs", { data: "result" });
+});
+
 app.get("/signup", (req, res) => {
   // use res.renser instead of sendfile
   // res.sendFile(__dirname + "/views/index.ejs");
