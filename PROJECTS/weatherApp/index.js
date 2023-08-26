@@ -3,7 +3,10 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import loadingSpinner from "loading-spinner";
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+debugger;
 
 const app = express();
 const port = 3009;
@@ -55,88 +58,44 @@ app.get("/", (req, res) => {
   // res.render("index.ejs", { data: "result" });
 });
 
-// app.post("/check", (req, res) => {
-//   if (userIsAuthorised) {
-//     res.sendFile(__dirname + "/public/secret.html");
-//   } else {
-//     res.sendFile(__dirname + "/public/index.html");
-//     //Alternatively res.redirect("/");
-//   }
-// });
-
-// app.get("/", async (req, res) => {
-//   try {
-//     const response = await axios.get("https://bored-api.appbrewery.com/random");
-//     const result = response.data;
-//     console.log(result);
-//     res.render("solution.ejs", { data: result });
-//   } catch (error) {
-//     console.error("Failed to make request:", error.message);
-//     res.render("solution.ejs", {
-//       error: error.message,
-//     });
-//   }
-// });
-
 app.post("/cityData", async (req, res) => {
+  debugger;
   try {
     console.log(req.body);
     const city = req.body.city;
     console.log(req.body.city);
+
+    loadingSpinner.start(100, {
+      clearChar: true,
+    });
+
     const response = await axios.get(
       // `https://bored-api.appbrewery.com/filter?type=${type}&participants=${participants}`
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3bfed66eb7f133ed0a0fed437223448e`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=`
     );
     const result = response.data;
-    console.log("everything here", result);
-    console.log("name", result.name);
-    console.log("tempeerature", result.main.temp);
-    res.render("weather.ejs", {
-      // data: result[Math.floor(Math.random() * result.length)],
-      data: result,
+
+    loadingSpinner.stop();
+
+    let navObj = {
+      name: result.name,
+      mainTemp: result.main.temp,
+      minTemp: result.main.temp_min,
+      maxTemp: result.main.temp_max,
+      country: result.sys.country,
+    };
+    console.log("tempeerature", navObj);
+    res.render("citydata.ejs", {
+      data: navObj,
     });
   } catch (error) {
-    console.error("Failed to make request:", error.message);
-    // res.render("weather.ejs", {
-    //   error: "No activities that match your criteria.",
-    // });
+    // console.error("Failed to make request:", error.message);
+    res.render("error.ejs", {
+      error:
+        "No activities that match your criteria, please carefully check your spellings",
+    });
   }
 });
-
-// class WeatherService {
-//   Future<WeatherModel> getWeather(String city) async {
-//     //https://api.openweathermap.org/data/2.5/weather?lat=6.4550575&lon=3.3941795&appid=3bfed66eb7f133ed0a0fed437223448e
-//     //https://api.openweathermap.org/data/2.5/weather?q=delhi&units=metric&appid=3bfed66eb7f133ed0a0fed437223448e
-
-//     final queryParams = {
-//       'q': city,
-//       'units': 'metric',
-//       'appid': '',
-//     };
-//     // final queryParams = {
-//     //   'lat': '6.4550575',
-//     //   'lon': '3.3941795',
-//     //   'units': 'metric',
-//     //   'appid': '',
-//     // };
-
-//     // final getUri =
-//     //     Uri.https('api.openweathermap.org', '/data/2.5/weather', queryParams);
-//     // print(getUri);
-
-//     final getUri =
-//         Uri.https('api.openweathermap.org', '/data/2.5/weather', queryParams);
-
-//     final response = await http.get(getUri);
-
-//     print(' api is waiting');
-
-//     print(response.body);
-
-//     final json = jsonDecode(response.body);
-//     return WeatherModel.fromJson(json);
-//   }
-// }
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
