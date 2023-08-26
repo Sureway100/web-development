@@ -64,6 +64,80 @@ app.get("/", (req, res) => {
 //   }
 // });
 
+// app.get("/", async (req, res) => {
+//   try {
+//     const response = await axios.get("https://bored-api.appbrewery.com/random");
+//     const result = response.data;
+//     console.log(result);
+//     res.render("solution.ejs", { data: result });
+//   } catch (error) {
+//     console.error("Failed to make request:", error.message);
+//     res.render("solution.ejs", {
+//       error: error.message,
+//     });
+//   }
+// });
+
+app.post("/cityData", async (req, res) => {
+  try {
+    console.log(req.body);
+    const city = req.body.city;
+    console.log(req.body.city);
+    const response = await axios.get(
+      // `https://bored-api.appbrewery.com/filter?type=${type}&participants=${participants}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3bfed66eb7f133ed0a0fed437223448e`
+    );
+    const result = response.data;
+    console.log("everything here", result);
+    console.log("name", result.name);
+    console.log("tempeerature", result.main.temp);
+    res.render("weather.ejs", {
+      // data: result[Math.floor(Math.random() * result.length)],
+      data: result,
+    });
+  } catch (error) {
+    console.error("Failed to make request:", error.message);
+    // res.render("weather.ejs", {
+    //   error: "No activities that match your criteria.",
+    // });
+  }
+});
+
+// class WeatherService {
+//   Future<WeatherModel> getWeather(String city) async {
+//     //https://api.openweathermap.org/data/2.5/weather?lat=6.4550575&lon=3.3941795&appid=3bfed66eb7f133ed0a0fed437223448e
+//     //https://api.openweathermap.org/data/2.5/weather?q=delhi&units=metric&appid=3bfed66eb7f133ed0a0fed437223448e
+
+//     final queryParams = {
+//       'q': city,
+//       'units': 'metric',
+//       'appid': '',
+//     };
+//     // final queryParams = {
+//     //   'lat': '6.4550575',
+//     //   'lon': '3.3941795',
+//     //   'units': 'metric',
+//     //   'appid': '',
+//     // };
+
+//     // final getUri =
+//     //     Uri.https('api.openweathermap.org', '/data/2.5/weather', queryParams);
+//     // print(getUri);
+
+//     final getUri =
+//         Uri.https('api.openweathermap.org', '/data/2.5/weather', queryParams);
+
+//     final response = await http.get(getUri);
+
+//     print(' api is waiting');
+
+//     print(response.body);
+
+//     final json = jsonDecode(response.body);
+//     return WeatherModel.fromJson(json);
+//   }
+// }
+
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
