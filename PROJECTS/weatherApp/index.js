@@ -71,7 +71,7 @@ app.post("/cityData", async (req, res) => {
 
     const response = await axios.get(
       // `https://bored-api.appbrewery.com/filter?type=${type}&participants=${participants}`
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3bfed66eb7f133ed0a0fed437223448e`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3bfed66eb7f133ed0a0fed437223448a`
     );
     const result = response.data;
 
