@@ -3,7 +3,6 @@ import bodyParser from "body-parser";
 import axios from "axios";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
-import loadingSpinner from "loading-spinner";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 debugger;
@@ -65,17 +64,11 @@ app.post("/cityData", async (req, res) => {
     const city = req.body.city;
     console.log(req.body.city);
 
-    loadingSpinner.start(100, {
-      clearChar: true,
-    });
-
     const response = await axios.get(
       // `https://bored-api.appbrewery.com/filter?type=${type}&participants=${participants}`
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3bfed66eb7f133ed0a0fed437223448a`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=3bfed66eb7f133ed0a0fed437223448e`
     );
     const result = response.data;
-
-    loadingSpinner.stop();
 
     let navObj = {
       name: result.name,
