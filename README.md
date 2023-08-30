@@ -40,3 +40,35 @@ CSS CSS CSS CSS CSS
 - element selector
 - attr selector => p[draggable] => this means select all para with attr draggable
 - universal selector
+
+----------------------mongodb
+C:\Program Files\MongoDB\Server\7.0
+create drive c/data/db
+cd ~
+touch .bash_profile
+i .bash_profile
+
+=======>
+0
+
+I faced alot of issues despite so many answers so this worked for me.
+
+1.First install git and hyper terminal
+
+2.Click the '~' sign to enter the home directory and then make a new file ".bash_profile"
+
+Enter the command "vim .bash_profile"
+Now enter 'i' key to enter the insert mode
+Copy paste the exact command below:
+alias mongod="C:/Program\ Files/MongoDB/Server/7.0/bin/mongod.exe"
+alias mongo="C:/Program\ Files/MongoDB/Server/7.0/bin/mongos.exe"
+
+(make sure that you use forward slash '/' for path and "\" backward slash to indicate space between program and files)
+
+enter esc
+write the command ':wq!' and click enter
+restart hyper terminal and check the installation by running the command 'mongo --version'
+
+======>
+
+ODM => object document mapper => mongosedb
