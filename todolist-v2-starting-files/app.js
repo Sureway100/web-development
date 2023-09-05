@@ -55,13 +55,13 @@ const itemC = new Item({ name: "your third item" });
 
 const defaultItems = [itemA, itemB, itemC];
 
-Item.insertMany(defaultItems)
-  .then(function () {
-    console.log("Successfully saved defult items to DB");
-  })
-  .catch(function (err) {
-    console.log(err);
-  });
+// Item.insertMany(defaultItems)
+//   .then(function () {
+//     console.log("Successfully saved defult items to DB");
+//   })
+//   .catch(function (err) {
+//     console.log(err);
+//   });
 // kitty.save().then(() => console.log("meow"));
 
 //
@@ -70,22 +70,56 @@ Item.insertMany(defaultItems)
 //
 //
 //
+// debugger;
+//  node --inspect app.js
+
+async function getItems() {
+  const Items = await Item.find({});
+  return Items;
+}
 
 app.get("/", function (req, res) {
   // const day = date.getDate();
 
-  res.render("list", { listTitle: "Today", newListItems: items });
+  // Item.find({}, function (err, foundItems) {
+  //   console.log(foundItems);
+  // });
+  getItems().then(function (FoundItems) {
+    // console.log(FoundItems);
+    if (FoundItems.length === 0) {
+      Item.insertMany(defaultItems)
+        .then(function () {
+          console.log("Successfully saved defult items to DB");
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+      res.redirect("/");
+    } else {
+      res.render("list", { listTitle: "Today", newListItems: FoundItems });
+    }
+  });
+
+  // res.render("list", { listTitle: "Today", newListItems: ["items", "aaa"] });
 });
 
 app.post("/", function (req, res) {
-  const item = req.body.newItem;
+  const itemName = req.body.newItem;
+  const listName = req.body.list;
 
-  if (req.body.list === "Work") {
-    workItems.push(item);
-    res.redirect("/work");
-  } else {
-    items.push(item);
+  const item = new Item({
+    name: itemName,
+  });
+
+  if (listName === "Today") {
+    item.save();
     res.redirect("/");
+  } else {
+    List.findOne({ name: listName }, function (err, foundList) {
+      foundList.items.push(item);
+      foundList.save();
+      res.redirect("/" + listName);
+    });
   }
 });
 
