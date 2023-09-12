@@ -1,4 +1,4 @@
-#codesandbox.io
+#codesandbox.io #https://www.appbrewery.co/p/web-development-course-resources/
 
 - ***
 
@@ -31,3 +31,35 @@ OR
 ###################################################################
 what is babel
 this is a javascript compiler, that converts es6,7,8 or even next gen js to what older version browsers will understand
+
+#######################################################################
+styling in react
+
+.header{
+color:red;
+}
+
+<h1 className="header"> hello spine </h1>
+
+OR
+
+//doing inline
+
+<h1 style={{color:red}}> hello <h1>
+
+OR
+
+const customStyle = {
+color: "red",
+fontSize: "20px",
+border: "1px solid black"
+};
+
+ReactDOM.render(
+
+  <h1 style={customStyle}>Hello World!</h1>,
+  document.getElementById("root")
+);
+
+//BOTE, CONVERT ALL YOUR CSS PROPERTIES TO CAMELCASE
+#############################################################################
